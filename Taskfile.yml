@@ -28,7 +28,7 @@ tasks:
 
   docker-clean:
     desc: "Clean up docker and volumn"
-    cmds: docker-compose down -v
+    cmd: docker-compose down -v
 
   dev:
     desc: "Start development server"
