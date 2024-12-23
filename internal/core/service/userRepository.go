@@ -55,7 +55,7 @@ func NewUserRepository(config *config.DB) (*UserRepository, error) {
 }
 
 // Database entity trans to local entity
-func dbUser2DomainUser(dbUser *User) *domain.User {
+func dbUserToDomainUser(dbUser *User) *domain.User {
 	return &domain.User{
 		ID:        dbUser.ID,
 		Name:      dbUser.Name,
@@ -68,7 +68,7 @@ func dbUser2DomainUser(dbUser *User) *domain.User {
 }
 
 // Local entity trans to Database entity 
-func domainUser2DbUser(user *domain.User) *User {
+func domainUserToDbUser(user *domain.User) *User {
 	return &User{
 		ID:        user.ID,
 		Name:      user.Name,
@@ -81,7 +81,7 @@ func domainUser2DbUser(user *domain.User) *User {
 }
 
 func (ur *UserRepository) CreateUser(ctx context.Context, user *domain.User) (*domain.User, error) {
-	dbUser := domainUser2DbUser(user)
+	dbUser := domainUserToDbUser(user)
 	result := ur.db.WithContext(ctx).Create(&dbUser)
 
 	if result.Error != nil {
@@ -102,7 +102,7 @@ func (ur *UserRepository) GetUserByID(ctx context.Context, id uint64) (*domain.U
 		return nil, domain.ErrConflictingData
 	}
 
-	return dbUser2DomainUser(&dbUser), nil
+	return dbUserToDomainUser(&dbUser), nil
 }
 
 func (ur *UserRepository) GetUserByEmail(ctx context.Context, email string) (*domain.User, error) {
@@ -116,7 +116,7 @@ func (ur *UserRepository) GetUserByEmail(ctx context.Context, email string) (*do
 		return nil, domain.ErrConflictingData
 	}
 
-	return dbUser2DomainUser(&dbUser), nil
+	return dbUserToDomainUser(&dbUser), nil
 }
 
 // ListUsers lists all users from the database, paginated by ID
@@ -133,7 +133,7 @@ func (ur *UserRepository) ListUsers(ctx context.Context, lastID uint64, limit ui
 	}
 
 	for _, dbUser := range dbUsers {
-		users = append(users, *dbUser2DomainUser(&dbUser))
+		users = append(users, *dbUserToDomainUser(&dbUser))
 	}
 
 	return users, nil
@@ -168,7 +168,7 @@ func (ur *UserRepository) UpdateUser(ctx context.Context, user *domain.User) (*d
 		return nil, err
 	}
 
-	return dbUser2DomainUser(&dbUser), nil
+	return dbUserToDomainUser(&dbUser), nil
 }
 
 
