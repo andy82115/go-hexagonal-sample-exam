@@ -1,8 +1,25 @@
 {
+    "schemes": [
+        "http",
+        "https"
+    ],
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is the exam for hexagonal architecture in go",
+        "title": "Go Hexagonal Sample API",
+        "contact": {
+            "name": "andy82115",
+            "url": "https://github.com/andy82115/go-hexagonal",
+            "email": "andy82115@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/andy82115"
+        },
+        "version": "1.0"
     },
+    "host": "${HTTP_URL}",
+    "basePath": "/v1",
     "paths": {
         "/users": {
             "get": {
@@ -537,6 +554,14 @@
                     "example": "1970-01-01T00:00:00Z"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Type \"Bearer\" followed by a space and the access token.",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

@@ -9,7 +9,15 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "andy82115",
+            "url": "https://github.com/andy82115/go-hexagonal",
+            "email": "andy82115@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/andy82115"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -549,17 +557,25 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Type \"Bearer\" followed by a space and the access token.",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Version:          "1.0",
+	Host:             "${HTTP_URL}",
+	BasePath:         "/v1",
+	Schemes:          []string{"http", "https"},
+	Title:            "Go Hexagonal Sample API",
+	Description:      "This is the exam for hexagonal architecture in go",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

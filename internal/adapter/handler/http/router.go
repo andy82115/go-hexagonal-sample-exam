@@ -45,7 +45,7 @@ func NewRouter(
 	// Custom validators
 	v, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {
-		// !hardcode: user_role is the UserRole in json
+		// !hardcode: user_role is the UserRole in json key for validator
 		if err := v.RegisterValidation("user_role", userRoleValidator); err != nil {
 			return nil, err
 		}
