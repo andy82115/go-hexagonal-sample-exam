@@ -9,10 +9,10 @@ DB_CONNECTION="postgres"
 DB_HOST="127.0.0.1"
 DB_PORT="5432"
 DB_NAME="gohexagonal"
-DB_USER="postgres"
-DB_PASSWORD=
+DB_USER="enter_db_user"
+DB_PASSWORD="1234"
 
-// Use Url at localstack request
+# Use Url at localstack request
 AWS_URL="INPUT YOUR AWS APIGATEWAY BASE URL HERE"
 
 TOKEN_DURATION="15m"
