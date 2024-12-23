@@ -1,0 +1,56 @@
+# https://taskfile.dev
+
+version: "3"
+
+dotenv:
+  - ".env"
+
+tasks:
+  default:
+    desc: "Gettings started"
+    cmds:
+      - task: install
+
+  install:
+    desc: "Install dependencies"
+    cmds:
+      - go mod download
+      - go install github.com/go-task/task/v3/cmd/task@latest
+      - go install github.com/air-verse/air@latest
+
+  docker-start:
+    desc: "Start services"
+    cmd: docker-compose up -d
+
+  docker-stop:
+    desc: "Stop services"
+    cmd: docker-compose down
+
+  docker-clean:
+    desc: "Clean up docker and volumn"
+    cmd: docker-compose down -v
+
+  dev:
+    desc: "Start development server"
+    cmd: air      
+
+  build:
+    desc: "Build binary"
+    cmd: go build -o ./bin/{{.APP_NAME}} ./cmd/http/main.go
+    requires:
+      vars:
+        - APP_NAME
+
+  start:
+    desc: "Start binary"
+    cmd: ./bin/{{.APP_NAME}}
+    requires:
+      vars:
+        - APP_NAME
+
+  swag:
+    desc: "Generate swagger documentation"
+    cmds:
+      - swag fmt
+      - swag init -g ./cmd/http/main.go -o ./docs --parseInternal true      
+
