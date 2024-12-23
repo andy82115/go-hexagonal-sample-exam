@@ -2,6 +2,7 @@ package config
 
 import (
 	"os"
+	"strconv"
 
 	"github.com/joho/godotenv"
 )
@@ -22,6 +23,7 @@ type (
 
 	Token struct {
 		Duration string
+		IsSaveSecretAtAws bool
 	}
 
 	DB struct {
@@ -58,8 +60,10 @@ func New() (*Container, error) {
 		Env:  os.Getenv("APP_ENV"),
 	}
 
+	isSaveSecretAtAws, _ := strconv.ParseBool(os.Getenv("TOKEN_SAVE_SECRET_AT_AWS"))
 	token := &Token{
 		Duration: os.Getenv("TOKEN_DURATION"),
+		IsSaveSecretAtAws: isSaveSecretAtAws,
 	}
 
 	db := &DB{
