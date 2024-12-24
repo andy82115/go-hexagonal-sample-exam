@@ -32,6 +32,14 @@ type UserRepository struct {
 	db *gorm.DB
 }
 
+// The gorm will abstract all the db action. Make this service easy to change db endpoint.
+// gormはすべてのdbアクションを抽象化する。dbのエンドポイントを簡単に変更できるようにする。
+func NewCustomWayRespository(db *gorm.DB) *UserRepository {
+	return &UserRepository{
+		db,
+	}
+}
+
 func NewUserRepository(config *config.DB) (*UserRepository, error) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		config.Host, config.User, config.Password, config.Name, config.Port)
@@ -88,7 +96,7 @@ func (ur *UserRepository) CreateUser(ctx context.Context, user *domain.User) (*d
 		return nil, domain.ErrConflictingData
 	}
 
-	return user, nil
+	return dbUserToDomainUser(dbUser), nil
 }
 
 func (ur *UserRepository) GetUserByID(ctx context.Context, id uint64) (*domain.User, error) {
