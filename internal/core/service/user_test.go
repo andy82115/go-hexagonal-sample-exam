@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-func TestRegister(t *testing.T) {
+func TestUserService_Register(t *testing.T) {
 	mockRepo := new(mocks.UserRepository)
 	userSvc := service.NewUserService(mockRepo)
 
@@ -47,7 +47,7 @@ func TestRegister(t *testing.T) {
 	mockRepo.AssertExpectations(t)
 }
 
-func TestGetUser(t *testing.T) {
+func TestUserService_GetUser(t *testing.T) {
 	mockRepo := new(mocks.UserRepository)
 	userSvc := service.NewUserService(mockRepo)
 
@@ -73,7 +73,7 @@ func TestGetUser(t *testing.T) {
 	mockRepo.AssertExpectations(t)
 }
 
-func TestListUsers(t *testing.T) {
+func TestUserService_ListUsers(t *testing.T) {
 	mockRepo := new(mocks.UserRepository)
 	userSvc := service.NewUserService(mockRepo)
 
@@ -98,7 +98,7 @@ func TestListUsers(t *testing.T) {
 	mockRepo.AssertExpectations(t)
 }
 
-func TestUpdateUser(t *testing.T) {
+func TestUserService_UpdateUser(t *testing.T) {
 	mockRepo := new(mocks.UserRepository)
 	userSvc := service.NewUserService(mockRepo)
 
@@ -132,7 +132,7 @@ func TestUpdateUser(t *testing.T) {
 	mockRepo.AssertExpectations(t)
 }
 
-func TestDeleteUser(t *testing.T) {
+func TestUserService_DeleteUser(t *testing.T) {
 	mockRepo := new(mocks.UserRepository)
 	userSvc := service.NewUserService(mockRepo)
 
