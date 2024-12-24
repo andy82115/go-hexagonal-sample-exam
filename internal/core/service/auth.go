@@ -36,15 +36,16 @@ func (as *AuthService) Login(ctx context.Context, email, password string) (strin
 		return "", domain.ErrInternal
 	}
 
-	err = util.ComparePassword(password, user.Password)
-	if err != nil {
+	// Compare password
+	if err := util.ComparePassword(password, user.Password); err != nil {
 		return "", domain.ErrInvalidCredentials
 	}
 
-	accessToken, err := as.ts.CreateToken(user)
+	// Create token
+	token, err := as.ts.CreateToken(user)
 	if err != nil {
 		return "", domain.ErrTokenCreation
 	}
 
-	return accessToken, nil
+	return token, nil
 }
