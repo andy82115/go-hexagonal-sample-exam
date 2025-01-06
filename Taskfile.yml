@@ -54,3 +54,8 @@ tasks:
       - swag fmt
       - swag init -g ./cmd/http/main.go -o ./docs --parseInternal true      
 
+  test:
+    desc: "run all test"
+    cmd: go test ./...
+    
+

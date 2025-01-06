@@ -1,3 +1,5 @@
+[日本語](./docs/README-JP.md)
+
 # How to install
 1. Download Docker & Docker-Compose for postgresql container
 2. Download Task 
